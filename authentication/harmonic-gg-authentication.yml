@@ -1,0 +1,46 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.harmonic.gg/searchers/harmonic-bundles
+docs: https://docs.harmonic.gg/searchers/harmonic-bundles
+grpc_source:
+- grpc/harmonic-gg-searcher-auth.proto
+- grpc/harmonic-gg-validator-auth.proto
+summary:
+  types:
+  - challenge-response
+  - bearer
+  model: Solana-keypair challenge-response issuing short-lived Bearer access + refresh tokens over gRPC metadata; there is no API key or OAuth surface.
+  allowlist_required: true
+schemes:
+- name: KeypairChallengeResponse
+  type: challenge-response
+  transport: grpc
+  service: auth.AuthService
+  description: >-
+    Clients authenticate by proving control of a Solana keypair. The client calls
+    GenerateAuthChallenge with its role and 32-byte pubkey, signs the returned
+    challenge (the client signs "{pubkey}-{challenge}"), then exchanges the signed
+    challenge via GenerateAuthTokens for an access token and a longer-lived refresh
+    token. RefreshAccessToken mints a fresh access token before expiry.
+  operations:
+  - GenerateAuthChallenge
+  - GenerateAuthTokens
+  - RefreshAccessToken
+  roles:
+    note: Harmonic uses Role.SEARCHER = 3, which differs from jito-protos where SEARCHER = 1. Reusing jito-protos clients requires authenticating with the ShredstreamSubscriber role (= 3).
+    values:
+    - {name: ROLE_UNSPECIFIED, value: 0}
+    - {name: SEARCHER, value: 3}
+- name: BearerToken
+  type: bearer
+  transport: grpc
+  location: metadata
+  description: >-
+    Each request carries the access token as a gRPC Bearer credential. Reference
+    client interceptors add the token automatically, refresh it ~5 minutes before
+    expiry, and re-authenticate when the refresh token expires.
+authorization:
+  allowlist:
+    description: Beyond token auth, the searcher pubkey (or validator identity) must be whitelisted by the Harmonic team before requests are accepted; a non-whitelisted key is rejected with permission denied.
+    searcher_intake: https://form.typeform.com/to/aUd0FiwD
+    validator_intake: https://form.typeform.com/to/UlJMfbPH
