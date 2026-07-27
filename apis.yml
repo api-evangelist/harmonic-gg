@@ -1,22 +1,95 @@
 aid: harmonic-gg
 name: Harmonic GG
-description: 'Harmonic GG is a company surfaced as a portfolio company of paradigm and added to the API
-  Evangelist network as a stub for enrichment. Sector: gaming. This profile is a lead awaiting the enrichment
-  pipeline.'
+description: >-
+  Harmonic is a highly-configurable, open block-building system for Solana. Validators
+  keep full autonomy over how their blocks are built, choosing their own block builder
+  and scheduling strategy (FBA, FIFO, MREV, or custom) while the block engine streams
+  the constructed block for broadcast. A Remote TPU aggregation layer collects proposals
+  from independent builders in real time, HFT-router style, to raise validator revenue
+  and strengthen network decentralization. Searchers submit atomic transaction bundles
+  over a gRPC interface that is backwards-compatible with Jito's searcher protos, with
+  revert protection, bundle privacy, and tips paid as ordinary priority fees (no protocol
+  cut). Harmonic raised a $6M seed round led by Paradigm.
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://harmonic.gg/api/og?v=home
 url: https://raw.githubusercontent.com/api-evangelist/harmonic-gg/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - paradigm
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: enriched
+x-tier-reason: portfolio-lead-enriched
+x-sector: blockchain-infrastructure
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
 - Company
-- Gaming
-apis: []
+- Blockchain
+- Solana
+- Block Building
+- MEV
+- Validator
+- Searcher
+- Infrastructure
+- gRPC
+- DeFi
+apis:
+- name: Harmonic Searcher API (gRPC)
+  description: >-
+    gRPC bundle-submission interface for searchers. Authenticate with a Solana keypair
+    (challenge-response to Bearer tokens), then submit atomic transaction bundles with
+    revert protection. Backwards-compatible with Jito's searcher protos; tips are
+    priority fees with no protocol cut. Requires a whitelisted searcher pubkey.
+  humanURL: https://docs.harmonic.gg/searchers/harmonic-bundles
+  baseURL: https://fra.be.harmonic.gg
+  tags:
+  - Solana
+  - MEV
+  - Bundles
+  - gRPC
+  properties:
+  - type: Protobuf
+    url: grpc/harmonic-gg-searcher-searcher.proto
+  - type: Protobuf
+    url: grpc/harmonic-gg-searcher-auth.proto
+  - type: Protobuf
+    url: grpc/harmonic-gg-searcher-bundle.proto
+  - type: Authentication
+    url: authentication/harmonic-gg-authentication.yml
+  - type: ErrorCatalog
+    url: errors/harmonic-gg-error-codes.yml
+- name: Harmonic Validator API (gRPC)
+  description: >-
+    gRPC services the Harmonic validator clients (Salsa/Samba) use to bind to a block
+    builder: subscribe to packet and bundle streams, set the scheduling strategy,
+    discover block engine endpoints, report leader windows, and proxy TPU traffic via
+    the relayer.
+  humanURL: https://docs.harmonic.gg/run-a-validator/endpoints
+  baseURL: https://fra.auction.harmonic.gg
+  tags:
+  - Solana
+  - Validator
+  - Block Building
+  - gRPC
+  properties:
+  - type: Protobuf
+    url: grpc/harmonic-gg-validator-block_engine.proto
+  - type: Protobuf
+    url: grpc/harmonic-gg-validator-relayer.proto
+  - type: Protobuf
+    url: grpc/harmonic-gg-validator-auth.proto
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -25,3 +98,56 @@ maintainers:
 common:
 - type: Website
   url: https://harmonic.gg
+- type: DeveloperPortal
+  url: https://docs.harmonic.gg
+- type: Documentation
+  url: https://docs.harmonic.gg
+- type: APIReference
+  url: https://docs.harmonic.gg/searchers/harmonic-bundles
+- type: GettingStarted
+  url: https://docs.harmonic.gg/run-a-validator/setup
+- type: Support
+  url: https://discord.com/invite/23GfZkkyAG
+- type: GitHubOrganization
+  url: https://github.com/harmonic
+- type: SourceCode
+  url: https://github.com/harmonic/searcher-protos
+- type: SignUp
+  url: https://form.typeform.com/to/UlJMfbPH
+- type: TermsOfService
+  url: https://harmonic.gg/terms-and-conditions
+- type: Protobuf
+  name: Searcher gRPC protos
+  url: grpc/harmonic-gg-searcher-searcher.proto
+- type: Protobuf
+  name: Validator gRPC protos
+  url: grpc/harmonic-gg-validator-block_engine.proto
+- type: LLMsTxt
+  url: llms/harmonic-gg-llms.txt
+- type: Authentication
+  url: authentication/harmonic-gg-authentication.yml
+- type: Sandbox
+  url: sandbox/harmonic-gg-sandbox.yml
+- type: Conventions
+  url: conventions/harmonic-gg-conventions.yml
+- type: Conformance
+  url: conformance/harmonic-gg-conformance.yml
+- type: ErrorCatalog
+  url: errors/harmonic-gg-error-codes.yml
+- type: Lifecycle
+  url: lifecycle/harmonic-gg-lifecycle.yml
+- type: DataModel
+  url: data-model/harmonic-gg-data-model.yml
+- type: MCPServer
+  url: mcp/harmonic-gg-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Packages
+  url: packages/harmonic-gg-packages.yml
+- type: DomainSecurity
+  url: security/harmonic-gg-domain-security.yml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

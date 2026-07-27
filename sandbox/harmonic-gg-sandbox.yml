@@ -1,0 +1,24 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.harmonic.gg/run-a-validator/endpoints
+docs: https://docs.harmonic.gg/run-a-validator/endpoints
+summary: >-
+  Harmonic runs a public Solana testnet cluster alongside mainnet. Validators and
+  searchers can point the same clients/protos at the testnet Block Engine, Remote
+  TPU, and Shred Receiver to exercise the full flow before mainnet. Access to both
+  mainnet and testnet still requires the identity/pubkey to be whitelisted by the
+  Harmonic team.
+environments:
+- name: mainnet
+  cluster: solana-mainnet-beta
+  regions: [Amsterdam, Newark, Frankfurt, London, Tokyo, Singapore, Salt Lake City]
+- name: testnet
+  cluster: solana-testnet
+  region: Salt Lake City
+  endpoints:
+    block_engine: https://testnet.be.harmonic.gg
+    remote_tpu: https://testnet.tpu.harmonic.gg
+    shred_receiver: 64.130.53.76:8001
+notes:
+- Test values (validator identities, searcher pubkeys) are supplied by the operator's own Solana keypairs; Harmonic does not publish shared magic test credentials.
+- Whitelisting is required for both testnet and mainnet access.

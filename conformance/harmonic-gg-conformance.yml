@@ -1,0 +1,27 @@
+generated: '2026-07-19'
+method: derived
+source: grpc/harmonic-gg-searcher-searcher.proto, grpc/harmonic-gg-validator-block_engine.proto, https://docs.harmonic.gg
+standards:
+- id: grpc
+  conforms: true
+  evidence: All services (auth.AuthService, searcher.SearcherService, BlockEngineValidator, Relayer) are gRPC over proto3.
+- id: protobuf3
+  conforms: true
+  evidence: All published .proto definitions declare syntax = "proto3".
+- id: jito-searcher-proto-compat
+  conforms: true
+  evidence: Docs state the SearcherService.SendBundle gRPC and auth flow are backwards-compatible with Jito's searcher protos (differing only in the Searcher role value).
+- id: solana-block-building
+  conforms: true
+  evidence: Implements Solana validator block-building/streaming, Remote TPU aggregation, and searcher bundle submission.
+- id: oauth2
+  conforms: false
+  evidence: No OAuth2; authentication is Solana-keypair challenge-response to Bearer tokens.
+- id: oidc
+  conforms: false
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: gRPC status codes are used, not HTTP application/problem+json.
+- id: rest-openapi
+  conforms: false
+  evidence: No REST/OpenAPI surface; the API is gRPC-only.

@@ -1,0 +1,37 @@
+# Harmonic Docs
+
+## Docs
+
+- [Introduction](https://docs.harmonic.gg/readme.md): Harmonic: open block-building infrastructure for Solana
+- [Architecture](https://docs.harmonic.gg/concepts/harmonic-architecture.md): The components that make up Harmonic and how they fit together
+- [Scheduling Strategies](https://docs.harmonic.gg/concepts/scheduling-strategies.md): The scheduling strategies that Harmonic builders run, how each one sequences transactions within a slot, and how to think about choosing between them
+- [Streaming](https://docs.harmonic.gg/concepts/streaming-mode.md): How streaming works in Harmonic, how the validator-to-builder binding is configured, and how the failover and fallback paths protect every leader slot
+- [Setup](https://docs.harmonic.gg/run-a-validator/setup.md): Choose between Samba (Firedancer) and Salsa (Agave), then follow the setup guide for the client you're running
+- [Samba (Firedancer)](https://docs.harmonic.gg/run-a-validator/setup/samba.md): Set up a Samba validator on top of upstream Firedancer
+- [Salsa (Agave)](https://docs.harmonic.gg/run-a-validator/setup/salsa.md): Harmonic's Agave-forked validator client
+- [Salsa 3.x](https://docs.harmonic.gg/run-a-validator/setup/salsa/salsa-3.md): Set up a Salsa 3.x validator on top of upstream Agave
+- [Salsa 4.x](https://docs.harmonic.gg/run-a-validator/setup/salsa/salsa-4.md): Set up a Salsa 4.x validator on top of upstream Agave
+- [Migration Guide](https://docs.harmonic.gg/run-a-validator/setup/salsa/migration.md): Upgrade an existing Salsa 3.x deployment to 4.x
+- [Endpoints](https://docs.harmonic.gg/run-a-validator/endpoints.md): Mainnet and testnet URLs for Harmonic block engines, Remote TPUs, and shred receivers.
+- [On-Chain Addresses](https://docs.harmonic.gg/run-a-validator/addresses.md): Tip-payment, tip-distribution, and merkle-upload-authority addresses by cluster
+- [NTP Configuration](https://docs.harmonic.gg/run-a-validator/ntp-configuration.md)
+- [Harmonic Bundles](https://docs.harmonic.gg/searchers/harmonic-bundles.md)
+- [Bundle Control Accounts](https://docs.harmonic.gg/searchers/bundle-control-accounts.md)
+- [Glossary](https://docs.harmonic.gg/reference/glossary.md): Definitions of Harmonic terms used throughout the docs
+- [FAQ](https://docs.harmonic.gg/reference/faq.md): Frequently asked questions about Harmonic
+
+
+---
+
+# Agent Instructions
+This documentation is published with GitBook. GitBook is the documentation platform designed so that both humans and AI agents can read, navigate, and reason over technical content effectively. Learn more at gitbook.com.
+
+## Querying This Documentation
+If you need additional information, you can query the documentation dynamically by asking a question.
+Perform an HTTP GET request on a page URL with the `ask` query parameter:
+```
+GET https://docs.harmonic.gg/readme.md?ask=<question>
+```
+The question should be specific, self-contained, and written in natural language.
+The response will contain a direct answer to the question and relevant excerpts and sources from the documentation.
+Use this mechanism when the answer is not explicitly present in the current page, you need clarification or additional context, or you want to retrieve related documentation sections.

@@ -1,0 +1,34 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.harmonic.gg/searchers/harmonic-bundles
+docs: https://docs.harmonic.gg
+summary: Cross-cutting request/response semantics for the Harmonic gRPC surface (searcher and validator services).
+transport:
+  protocol: grpc
+  encoding: protobuf
+  jito_compatibility: Backwards-compatible with Jito's searcher protos; existing Jito client code adapts by changing the endpoint URL, proto imports, and the Searcher role value.
+authentication:
+  style: Solana-keypair challenge-response to short-lived Bearer access/refresh tokens
+  ref: authentication/harmonic-gg-authentication.yml
+idempotency:
+  supported: false
+  note: Bundle submission is not idempotency-keyed; each SendBundle returns a fresh server-assigned bundle UUID. Atomicity is provided at the bundle level (all-or-nothing execution with revert protection), not via a client idempotency key.
+regions:
+  cross_forwarding: Harmonic automatically cross-forwards bundles to all regions; clients should send to the single closest geographical region rather than fan out.
+  selection: Validators can call GetBlockEngineEndpoints to discover endpoints for optimal region selection.
+  endpoints_ref: https://docs.harmonic.gg/run-a-validator/endpoints
+tips:
+  model: Tips are Solana compute-unit priority fees on the transactions themselves, not transfers to a designated tip account. 100% goes to the validator; there is no protocol fee.
+bundle_control:
+  mechanism: Bundle Control Accounts - a public key with a recognised base58 prefix attached as the first account on a Compute Budget instruction signals inclusion constraints to the block engine.
+  directives:
+  - {prefix: dontfront, effect: transaction must be at index 0 of any bundle that includes it}
+  - {prefix: jitodontfront, effect: alias of dontfront}
+  - {prefix: dontbund1e, effect: transaction must be first and co-bundled transactions may only invoke System, Compute Budget, and Memo programs}
+  ref: https://docs.harmonic.gg/searchers/bundle-control-accounts
+error_handling:
+  ref: errors/harmonic-gg-error-codes.yml
+  style: gRPC status codes; whitelist failures surface as permission-denied.
+versioning:
+  ref: lifecycle/harmonic-gg-lifecycle.yml
+  style: Client-version trains (Salsa 3.x / 4.x, Samba) rather than a versioned wire API; the proto contract is stable and Jito-compatible.

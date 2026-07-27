@@ -1,0 +1,43 @@
+generated: '2026-07-19'
+method: derived
+source: grpc/harmonic-gg-searcher-bundle.proto, grpc/harmonic-gg-searcher-packet.proto, grpc/harmonic-gg-searcher-shared.proto, grpc/harmonic-gg-searcher-auth.proto
+entities:
+- name: Bundle
+  proto: bundle.Bundle
+  fields: [header, packets]
+  description: A set of transactions to be executed atomically; on success the searcher receives a server-assigned UUID.
+- name: Packet
+  proto: packet.Packet
+  fields: [data, meta]
+  description: A single serialized transaction plus packet metadata.
+- name: Meta
+  proto: packet.Meta
+  fields: [size, addr, port, flags, sender_stake]
+- name: PacketFlags
+  proto: packet.PacketFlags
+  fields: [discard, forwarded, repair, simple_vote_tx, tracer_packet, from_staked_node]
+- name: Header
+  proto: shared.Header
+  fields: [ts]
+  description: Optional timestamp attached to a bundle.
+- name: Token
+  proto: auth.Token
+  fields: [value, expires_at_utc]
+  description: Access or refresh token issued by AuthService.
+relationships:
+- from: Bundle
+  to: Packet
+  type: has_many
+  via: packets
+- from: Bundle
+  to: Header
+  type: has_one
+  via: header
+- from: Packet
+  to: Meta
+  type: has_one
+  via: meta
+- from: Meta
+  to: PacketFlags
+  type: has_one
+  via: flags

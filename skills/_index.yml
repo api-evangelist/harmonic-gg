@@ -1,0 +1,7 @@
+generated: '2026-07-19'
+method: generated
+skills:
+- file: harmonic-gg-send-bundle.md
+  name: Send a searcher bundle to Harmonic
+  api: grpc/harmonic-gg-searcher-searcher.proto
+  operations: [GenerateAuthChallenge, GenerateAuthTokens, RefreshAccessToken, SendBundle]

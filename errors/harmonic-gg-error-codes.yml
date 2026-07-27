@@ -1,0 +1,31 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.harmonic.gg/searchers/harmonic-bundles
+docs: https://docs.harmonic.gg/searchers/harmonic-bundles
+format: grpc-status
+envelope: gRPC status code + message returned on the RPC response
+errors:
+- code: PERMISSION_DENIED
+  grpc_status: 7
+  condition: The searcher pubkey (or validator identity) is not whitelisted, or the wrong Searcher role was used when authenticating.
+  cause: Harmonic requires the key to be whitelisted, and uses Role.SEARCHER = 3 (jito-protos clients must authenticate with the ShredstreamSubscriber role = 3).
+  remediation: Request whitelisting via the searcher intake form and authenticate with the correct Searcher role (= 3).
+  masked_to_user: false
+- code: UNAUTHENTICATED
+  grpc_status: 16
+  condition: Missing, invalid, or expired Bearer access token.
+  cause: Access tokens are short-lived; the token was not attached or was not refreshed before expiry.
+  remediation: Complete the challenge-response flow (GenerateAuthChallenge -> GenerateAuthTokens) and refresh the access token before it expires (reference interceptors refresh ~5 min before expiry).
+  masked_to_user: false
+- code: BUNDLE_REVERTED_DROPPED
+  grpc_status: null
+  condition: Any transaction in a submitted bundle reverts.
+  cause: Revert protection - the entire bundle is dropped and will not land on-chain (atomic all-or-nothing execution).
+  remediation: No transaction fees are charged for the dropped bundle; resubmit a corrected bundle.
+  masked_to_user: false
+- code: BUNDLE_REJECTED_CONTROL_ACCOUNT
+  grpc_status: null
+  condition: A bundle violates a Bundle Control Account directive (e.g. does not place a dontfront-protected transaction at index 0, or co-bundles disallowed program invocations under dontbund1e).
+  cause: The block engine enforces bundle-control constraints attached to protected transactions.
+  remediation: Respect the dontfront/dontbund1e placement and program-allowlist constraints when constructing bundles.
+  masked_to_user: false

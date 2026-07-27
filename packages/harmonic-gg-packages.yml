@@ -1,0 +1,42 @@
+generated: '2026-07-19'
+method: derived
+source: https://github.com/harmonic
+note: >-
+  No first-party client SDK is published to a language package registry (npm, PyPI,
+  crates.io, Maven, NuGet, RubyGems, Packagist, Go modules all returned no
+  first-party Harmonic client library). Integration is via the public protobuf
+  definitions (Jito-searcher-proto compatible) and the open-source validator clients,
+  distributed as source on GitHub.
+packages:
+- language: protobuf
+  registry: github
+  name: harmonic/searcher-protos
+  url: https://github.com/harmonic/searcher-protos
+  install: git submodule add https://github.com/harmonic/searcher-protos.git
+  official: true
+  note: Searcher-side protobuf definitions (auth, searcher, bundle, packet, shared).
+- language: protobuf
+  registry: github
+  name: harmonic/validator-protos
+  url: https://github.com/harmonic/validator-protos
+  install: git clone https://github.com/harmonic/validator-protos
+  official: true
+  note: Protobuf definitions for the Harmonic validator client.
+- language: rust
+  registry: github
+  name: harmonic/samba
+  url: https://github.com/harmonic/samba
+  official: true
+  note: Samba validator client (Firedancer fork).
+- language: rust
+  registry: github
+  name: harmonic/salsa
+  url: https://github.com/harmonic/salsa
+  official: true
+  note: Salsa validator client (Agave fork).
+- language: rust
+  registry: github
+  name: harmonic/tx-sender
+  url: https://github.com/harmonic/tx-sender
+  official: true
+  note: Leader-targeted Solana transaction sender.

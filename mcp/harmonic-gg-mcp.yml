@@ -1,0 +1,30 @@
+generated: '2026-07-19'
+method: derived
+status: candidate
+source: grpc/harmonic-gg-searcher-searcher.proto, grpc/harmonic-gg-searcher-auth.proto, grpc/harmonic-gg-validator-block_engine.proto
+note: >-
+  Harmonic publishes no official hosted MCP server. This is a candidate tool list
+  derived from the published gRPC service operations, provided as a starting point
+  for an agent-native surface. Every tool maps to a real gRPC rpc.
+server:
+  name: harmonic
+  transport: grpc-bridge
+tools:
+- name: generate_auth_challenge
+  description: Request a challenge to be signed by a Solana keypair.
+  source_operation: grpc/harmonic-gg-searcher-auth.proto#GenerateAuthChallenge
+- name: generate_auth_tokens
+  description: Exchange a signed challenge for access and refresh tokens.
+  source_operation: grpc/harmonic-gg-searcher-auth.proto#GenerateAuthTokens
+- name: refresh_access_token
+  description: Mint a fresh access token from a valid refresh token.
+  source_operation: grpc/harmonic-gg-searcher-auth.proto#RefreshAccessToken
+- name: send_bundle
+  description: Submit a bundle of transactions for atomic inclusion in a block; returns a server-assigned UUID.
+  source_operation: grpc/harmonic-gg-searcher-searcher.proto#SendBundle
+- name: get_block_engine_endpoints
+  description: Discover available block engine endpoints for optimal region selection.
+  source_operation: grpc/harmonic-gg-validator-block_engine.proto#GetBlockEngineEndpoints
+- name: set_strategy
+  description: Set the scheduling strategy for a validator session.
+  source_operation: grpc/harmonic-gg-validator-block_engine.proto#SetStrategy

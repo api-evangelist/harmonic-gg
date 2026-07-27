@@ -1,0 +1,27 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.harmonic.gg/run-a-validator/setup
+docs: https://docs.harmonic.gg
+versioning:
+  scheme: client-version-train
+  clients:
+  - name: Salsa (Agave fork)
+    versions: ['3.x', '4.x']
+    setup: https://docs.harmonic.gg/run-a-validator/setup/salsa
+  - name: Samba (Firedancer fork)
+    setup: https://docs.harmonic.gg/run-a-validator/setup/samba
+  wire_contract: The gRPC/proto contract is stable and Jito-searcher-proto compatible; versioning is expressed through validator client releases, not a versioned wire API.
+migration:
+  policy_url: https://docs.harmonic.gg/run-a-validator/setup/salsa/migration
+  description: Documented upgrade path for moving an existing Salsa 3.x deployment to 4.x.
+failover:
+  description: On builder failure the block engine fails over mid-slot to another builder running the same scheduling strategy; if none is reachable the validator falls back to its own in-client scheduler.
+  ref: https://docs.harmonic.gg/concepts/streaming-mode
+sla:
+  published: false
+status_page:
+  published: false
+  note: No public status page found (status.harmonic.gg does not resolve as of the probe date).
+deprecation:
+  policy_published: false
+  note: Legacy auction.harmonic.gg DNS hostnames remain supported; docs state updated DNS records may be issued in a future release. No formal dated deprecation/sunset policy is published.
