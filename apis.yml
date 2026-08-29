@@ -10,6 +10,18 @@ description: >-
   over a gRPC interface that is backwards-compatible with Jito's searcher protos, with
   revert protection, bundle privacy, and tips paid as ordinary priority fees (no protocol
   cut). Harmonic raised a $6M seed round led by Paradigm.
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: true
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - pricing
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: unknown
